@@ -13,6 +13,12 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)
     bio = models.TextField(blank=True)
     city = models.CharField(max_length=100, blank=True)
+    
+    # Social media links
+    whatsapp = models.CharField(max_length=100, blank=True, help_text='WhatsApp username or phone number')
+    telegram = models.CharField(max_length=100, blank=True, help_text='Telegram username')
+    instagram = models.CharField(max_length=100, blank=True, help_text='Instagram username')
+    
     rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.0)
     reviews_count = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)

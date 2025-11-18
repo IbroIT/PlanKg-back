@@ -14,6 +14,12 @@ class ReviewListView(generics.ListAPIView):
         service_id = self.kwargs.get('service_id')
         if service_id:
             return Review.objects.filter(service_id=service_id).select_related('user')
+        
+        # Filter by user (for profile page - reviews about user's services)
+        user_id = self.request.query_params.get('user')
+        if user_id:
+            return Review.objects.filter(service__user_id=user_id).select_related('user', 'service')
+        
         return Review.objects.all().select_related('user', 'service')
 
 

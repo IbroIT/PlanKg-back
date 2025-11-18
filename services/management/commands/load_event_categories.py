@@ -10,164 +10,156 @@ class Command(BaseCommand):
         Category.objects.all().delete()
         
         categories_data = [
-            # 1. Рестораны
+            # 1. Фотографы
             {
-                'translations': {'ru': 'Рестораны', 'en': 'Restaurants', 'kg': 'Ресторандар'},
-                'slug': 'restaurants-main',
-                'icon': '🍽️',
+                'translations': {'ru': 'Фотографы', 'en': 'Photographers', 'kg': 'Фотографтар'},
+                'slug': 'photographers',
+                'icon': '📸',
                 'order': 1,
-                'children': [
-                    {'translations': {'ru': 'Рестораны', 'en': 'Restaurants', 'kg': 'Ресторандар'}, 'slug': 'restaurants', 'icon': '🏛️'},
-                    {'translations': {'ru': 'Кейтеринг', 'en': 'Catering', 'kg': 'Кейтеринг'}, 'slug': 'catering', 'icon': '🍴'},
-                    {'translations': {'ru': 'Компании (все включено)', 'en': 'All-inclusive Companies', 'kg': 'Компаниялар (баары кошулган)'}, 'slug': 'all-inclusive', 'icon': '🎪'},
-                    {'translations': {'ru': 'Индивидуально', 'en': 'Individual', 'kg': 'Жеке'}, 'slug': 'individual-catering', 'icon': '👤'},
-                ]
             },
             
-            # 2. Персонал
+            # 2. Видеооператоры
             {
-                'translations': {'ru': 'Персонал', 'en': 'Staff', 'kg': 'Кызматкерлер'},
-                'slug': 'staff',
-                'icon': '👨‍🍳',
+                'translations': {'ru': 'Видеооператоры', 'en': 'Videographers', 'kg': 'Видеооператорлор'},
+                'slug': 'videographers',
+                'icon': '🎥',
                 'order': 2,
-                'children': [
-                    {'translations': {'ru': 'Повар', 'en': 'Chef', 'kg': 'Ашпоз'}, 'slug': 'chef', 'icon': '👨‍🍳'},
-                    {'translations': {'ru': 'Бармен', 'en': 'Bartender', 'kg': 'Бармен'}, 'slug': 'bartender', 'icon': '🍸'},
-                    {'translations': {'ru': 'Официант', 'en': 'Waiter', 'kg': 'Официант'}, 'slug': 'waiter', 'icon': '🤵'},
-                    {'translations': {'ru': 'Уборка', 'en': 'Cleaning', 'kg': 'Тазалоо'}, 'slug': 'cleaning', 'icon': '🧹'},
-                    {'translations': {'ru': 'Посудомойка', 'en': 'Dishwasher', 'kg': 'Идиш жуугуч'}, 'slug': 'dishwasher', 'icon': '🍽️'},
-                ]
             },
             
-            # 3. Развлечения
+            # 3. Ведущие / Тамада
             {
-                'translations': {'ru': 'Развлечения', 'en': 'Entertainment', 'kg': 'Көңүл ачуу'},
-                'slug': 'entertainment',
-                'icon': '🎭',
+                'translations': {'ru': 'Ведущие / Тамада', 'en': 'Hosts / Toastmasters', 'kg': 'Алып баруучулар / Тамадалар'},
+                'slug': 'hosts-toastmasters',
+                'icon': '🎤',
                 'order': 3,
-                'children': [
-                    {'translations': {'ru': 'Ведущий/Тамада', 'en': 'Host/MC', 'kg': 'Алып баруучу/Тамада'}, 'slug': 'host-mc', 'icon': '🎤'},
-                    {'translations': {'ru': 'Шоу-программы', 'en': 'Show Programs', 'kg': 'Шоу программалар'}, 'slug': 'show-programs', 'icon': '🎪'},
-                    {'translations': {'ru': 'Певцы', 'en': 'Singers', 'kg': 'Ырчылар'}, 'slug': 'singers', 'icon': '🎵'},
-                    {'translations': {'ru': 'Танцоры', 'en': 'Dancers', 'kg': 'Бийчилер'}, 'slug': 'dancers', 'icon': '💃'},
-                    {'translations': {'ru': 'Аниматоры', 'en': 'Animators', 'kg': 'Аниматорлор'}, 'slug': 'animators', 'icon': '🤡'},
-                    {'translations': {'ru': 'Оркестр', 'en': 'Orchestra', 'kg': 'Оркестр'}, 'slug': 'orchestra', 'icon': '🎻'},
-                    {'translations': {'ru': 'Фокусник', 'en': 'Magician', 'kg': 'Фокусчу'}, 'slug': 'magician', 'icon': '🎩'},
-                ]
             },
             
-            # 4. Организация
+            # 4. Залы / Рестораны / Площадки
             {
-                'translations': {'ru': 'Организация мероприятий', 'en': 'Event Planning', 'kg': 'Иш-чараларды уюштуруу'},
-                'slug': 'event-planning',
-                'icon': '📋',
+                'translations': {'ru': 'Залы / Рестораны / Площадки', 'en': 'Venues / Restaurants / Halls', 'kg': 'Залдар / Ресторандар / Аянтчалар'},
+                'slug': 'venues-restaurants-halls',
+                'icon': '🏛️',
                 'order': 4,
-                'children': [
-                    {'translations': {'ru': 'Организаторы мероприятий', 'en': 'Event Organizers', 'kg': 'Иш-чаралардын уюштуруучулары'}, 'slug': 'event-organizers', 'icon': '📅'},
-                    {'translations': {'ru': 'Праздничное оформление', 'en': 'Holiday Decoration', 'kg': 'Майрамдык оформление'}, 'slug': 'holiday-decoration', 'icon': '🎉'},
-                ]
             },
             
-            # 5. Декор и оформление
+            # 5. Флористы / Декораторы
             {
-                'translations': {'ru': 'Декор и оформление', 'en': 'Decor & Design', 'kg': 'Декор жана оформление'},
-                'slug': 'decor-design',
-                'icon': '🎨',
-                'order': 5,
-                'children': [
-                    {'translations': {'ru': 'Декор', 'en': 'Decor', 'kg': 'Декор'}, 'slug': 'decor', 'icon': '✨'},
-                    {'translations': {'ru': 'Фото стенды', 'en': 'Photo Booths', 'kg': 'Фото стенддери'}, 'slug': 'photo-booths', 'icon': '📸'},
-                    {'translations': {'ru': 'Шарики', 'en': 'Balloons', 'kg': 'Шарлар'}, 'slug': 'balloons', 'icon': '🎈'},
-                ]
-            },
-            
-            # 6. Приглашения
-            {
-                'translations': {'ru': 'Приглашения', 'en': 'Invitations', 'kg': 'Чакыруулар'},
-                'slug': 'invitations',
-                'icon': '💌',
-                'order': 6,
-                'children': [
-                    {'translations': {'ru': 'Пригласительные', 'en': 'Invitation Cards', 'kg': 'Чакыруу карттары'}, 'slug': 'invitation-cards', 'icon': '💌'},
-                    {'translations': {'ru': 'Открытки', 'en': 'Cards', 'kg': 'Карттар'}, 'slug': 'cards', 'icon': '🎁'},
-                    {'translations': {'ru': 'Сайт-приглашения', 'en': 'Website Invitations', 'kg': 'Сайт-чакыруулар'}, 'slug': 'website-invitations', 'icon': '💻'},
-                ]
-            },
-            
-            # 7. Фото/Видео
-            {
-                'translations': {'ru': 'Фото и Видео', 'en': 'Photo & Video', 'kg': 'Фото жана Видео'},
-                'slug': 'photo-video',
-                'icon': '📷',
-                'order': 7,
-                'children': [
-                    {'translations': {'ru': 'Студии', 'en': 'Studios', 'kg': 'Студиялар'}, 'slug': 'studios', 'icon': '🏢'},
-                    {'translations': {'ru': 'Фотограф', 'en': 'Photographer', 'kg': 'Фотограф'}, 'slug': 'photographer', 'icon': '📷'},
-                    {'translations': {'ru': 'Видеограф', 'en': 'Videographer', 'kg': 'Видеограф'}, 'slug': 'videographer', 'icon': '🎥'},
-                ]
-            },
-            
-            # 8. Свадебные платья
-            {
-                'translations': {'ru': 'Свадебные платья', 'en': 'Wedding Dresses', 'kg': 'Үйлөнүү көйнөктөрү'},
-                'slug': 'wedding-dresses',
-                'icon': '👗',
-                'order': 8,
-                'children': [
-                    {'translations': {'ru': 'Купить', 'en': 'Buy', 'kg': 'Сатып алуу'}, 'slug': 'buy-dresses', 'icon': '🛍️'},
-                    {'translations': {'ru': 'Аренда', 'en': 'Rent', 'kg': 'Ижарага алуу'}, 'slug': 'rent-dresses', 'icon': '👗'},
-                ]
-            },
-            
-            # 9. Салон красоты
-            {
-                'translations': {'ru': 'Салон красоты', 'en': 'Beauty Salon', 'kg': 'Сулуулук салону'},
-                'slug': 'beauty-salon',
-                'icon': '💅',
-                'order': 9,
-                'children': [
-                    {'translations': {'ru': 'Прическа', 'en': 'Hairstyle', 'kg': 'Чач жасоо'}, 'slug': 'hairstyle', 'icon': '💇'},
-                    {'translations': {'ru': 'Макияж', 'en': 'Makeup', 'kg': 'Макияж'}, 'slug': 'makeup', 'icon': '💄'},
-                    {'translations': {'ru': 'Маникюр/Педикюр', 'en': 'Manicure/Pedicure', 'kg': 'Маникюр/Педикюр'}, 'slug': 'manicure-pedicure', 'icon': '💅'},
-                ]
-            },
-            
-            # 10. Цветы
-            {
-                'translations': {'ru': 'Цветы', 'en': 'Flowers', 'kg': 'Гүлдөр'},
-                'slug': 'flowers',
+                'translations': {'ru': 'Флористы / Декораторы', 'en': 'Florists / Decorators', 'kg': 'Флористтер / Декораторлор'},
+                'slug': 'florists-decorators',
                 'icon': '💐',
-                'order': 10,
-                'children': [
-                    {'translations': {'ru': 'Букет невесты', 'en': 'Bridal Bouquet', 'kg': 'Келиндин букети'}, 'slug': 'bridal-bouquet', 'icon': '💐'},
-                    {'translations': {'ru': 'Цветы для оформления', 'en': 'Decoration Flowers', 'kg': 'Оформлениеге гүлдөр'}, 'slug': 'decoration-flowers', 'icon': '🌸'},
-                    {'translations': {'ru': 'Цветы', 'en': 'Flowers', 'kg': 'Гүлдөр'}, 'slug': 'flowers-general', 'icon': '�'},
-                ]
+                'order': 5,
             },
             
-            # 11. Ювелирные изделия
+            # 6. Кейтеринг
             {
-                'translations': {'ru': 'Ювелирные изделия', 'en': 'Jewelry', 'kg': 'Зергерлик буюмдар'},
-                'slug': 'jewelry',
-                'icon': '💍',
+                'translations': {'ru': 'Кейтеринг', 'en': 'Catering', 'kg': 'Кейтеринг'},
+                'slug': 'catering',
+                'icon': '🍽️',
+                'order': 6,
+            },
+            
+            # 7. Музыканты / Ди-джеи / Группы
+            {
+                'translations': {'ru': 'Музыканты / Ди-джеи / Группы', 'en': 'Musicians / DJs / Bands', 'kg': 'Музыканттар / Ди-джеилер / Группалар'},
+                'slug': 'musicians-djs-bands',
+                'icon': '🎵',
+                'order': 7,
+            },
+            
+            # 8. Артисты / Шоу-программа
+            {
+                'translations': {'ru': 'Артисты / Шоу-программа', 'en': 'Artists / Show Programs', 'kg': 'Артистер / Шоу программалар'},
+                'slug': 'artists-show-programs',
+                'icon': '🎭',
+                'order': 8,
+            },
+            
+            # 9. Организаторы / Event-агентства
+            {
+                'translations': {'ru': 'Организаторы / Event-агентства', 'en': 'Event Organizers / Agencies', 'kg': 'Уюштуруучулар / Event агенттиктери'},
+                'slug': 'event-organizers-agencies',
+                'icon': '📋',
+                'order': 9,
+            },
+            
+            # 10. Транспорт (авто, лимузины, автобусы)
+            {
+                'translations': {'ru': 'Транспорт (авто, лимузины, автобусы)', 'en': 'Transportation (cars, limousines, buses)', 'kg': 'Транспорт (авто, лимузиндер, автобус)'},
+                'slug': 'transportation',
+                'icon': '🚗',
+                'order': 10,
+            },
+            
+            # 11. Стилисты / Визажисты / Парикмахеры
+            {
+                'translations': {'ru': 'Стилисты / Визажисты / Парикмахеры', 'en': 'Stylists / Makeup Artists / Hairdressers', 'kg': 'Стилисттер / Визажисттер / Парикмахерлер'},
+                'slug': 'stylists-makeup-hairdressers',
+                'icon': '💄',
                 'order': 11,
-                'children': [
-                    {'translations': {'ru': 'Ювелирные изделия', 'en': 'Jewelry', 'kg': 'Зергерлик буюмдар'}, 'slug': 'jewelry-items', 'icon': '💎'},
-                ]
+            },
+            
+            # 12. Пекарни / Торты / Десерты
+            {
+                'translations': {'ru': 'Пекарни / Торты / Десерты', 'en': 'Bakeries / Cakes / Desserts', 'kg': 'Пекарнялар / Торттор / Десерттер'},
+                'slug': 'bakeries-cakes-desserts',
+                'icon': '🍰',
+                'order': 12,
+            },
+            
+            # 13. Фото-зоны / Оборудование / Реквизит
+            {
+                'translations': {'ru': 'Фото-зоны / Оборудование / Реквизит', 'en': 'Photo Zones / Equipment / Props', 'kg': 'Фото-зоналар / Жабдуулар / Реквизит'},
+                'slug': 'photo-zones-equipment-props',
+                'icon': '📷',
+                'order': 13,
+            },
+            
+            # 14. Официанты / Персонал на мероприятие
+            {
+                'translations': {'ru': 'Официанты / Персонал на мероприятие', 'en': 'Waiters / Event Staff', 'kg': 'Официанттар / Иш-чара персоналы'},
+                'slug': 'waiters-event-staff',
+                'icon': '🤵',
+                'order': 14,
+            },
+            
+            # 15. Охрана
+            {
+                'translations': {'ru': 'Охрана', 'en': 'Security', 'kg': 'Камсыздоо'},
+                'slug': 'security',
+                'icon': '🛡️',
+                'order': 15,
+            },
+            
+            # 16. Аниматоры (детские мероприятия)
+            {
+                'translations': {'ru': 'Аниматоры (детские мероприятия)', 'en': 'Animators (children\'s events)', 'kg': 'Аниматорлор (балдар иш-чаралары)'},
+                'slug': 'animators-children-events',
+                'icon': '🤡',
+                'order': 16,
+            },
+            
+            # 17. Освещение / Звук / Сцена
+            {
+                'translations': {'ru': 'Освещение / Звук / Сцена', 'en': 'Lighting / Sound / Stage', 'kg': 'Жарык / Үн / Сахна'},
+                'slug': 'lighting-sound-stage',
+                'icon': '🎛️',
+                'order': 17,
             },
         ]
         
         # Create categories
         for cat_data in categories_data:
-            children = cat_data.pop('children', [])
-            parent = Category.objects.create(**cat_data)
-            self.stdout.write(self.style.SUCCESS(f'Created parent category: {parent.get_translation("ru")}'))
-            
-            # Create subcategories
-            for i, child_data in enumerate(children, start=1):
-                child_data['parent'] = parent
-                child_data['order'] = i
-                child = Category.objects.create(**child_data)
-                self.stdout.write(self.style.SUCCESS(f'  - Created subcategory: {child.get_translation("ru")}'))
+            category, created = Category.objects.get_or_create(
+                slug=cat_data['slug'],
+                defaults={
+                    'translations': cat_data['translations'],
+                    'icon': cat_data['icon'],
+                    'order': cat_data['order']
+                }
+            )
+            if created:
+                self.stdout.write(self.style.SUCCESS(f'Created category: {category.get_translation("ru")}'))
+            else:
+                self.stdout.write(self.style.WARNING(f'Category already exists: {category.get_translation("ru")}'))
         
         self.stdout.write(self.style.SUCCESS('\n✓ All event categories loaded successfully!'))

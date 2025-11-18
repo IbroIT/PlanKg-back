@@ -29,18 +29,36 @@ class ServiceListView(generics.ListAPIView):
     filter_backends = [filters.OrderingFilter]
     ordering_fields = ['created_at', 'rating', 'price', 'views_count']
     ordering = ['-created_at']
+    pagination_class = None  # Disable pagination
     
     def get_queryset(self):
         queryset = Service.objects.filter(
             is_active=True, 
-            status='approved',
-            category__isnull=False  # Показываем только услуги с категорией
+            status='approved'
+            # category__isnull=False  # Показываем только услуги с категорией - временно отключено
         ).select_related('user', 'category')
         
         # Filters
         category_id = self.request.query_params.get('category')
         if category_id:
-            queryset = queryset.filter(category_id=category_id)
+            # Check if it's a parent category
+            try:
+                parent_category = Category.objects.get(id=category_id, parent__isnull=True)
+                # Get all subcategories of this parent
+                subcategory_ids = list(parent_category.subcategories.values_list('id', flat=True))
+                # Include parent category and all subcategories
+                category_ids = [int(category_id)] + subcategory_ids
+                queryset = queryset.filter(category_id__in=category_ids)
+            except Category.DoesNotExist:
+                # It's a subcategory or invalid ID, filter directly
+                queryset = queryset.filter(category_id=category_id)
+            except ValueError:
+                # Invalid category_id format
+                queryset = queryset.none()
+        
+        user_id = self.request.query_params.get('user')
+        if user_id:
+            queryset = queryset.filter(user_id=user_id)
         
         city = self.request.query_params.get('city')
         if city:
@@ -75,15 +93,11 @@ class ServiceListView(generics.ListAPIView):
         # Search
         search = self.request.query_params.get('search')
         if search:
-            queryset = queryset.filter(
-                Q(translations__ru__title__icontains=search) |
-                Q(translations__ru__description__icontains=search) |
-                Q(translations__en__title__icontains=search) |
-                Q(translations__en__description__icontains=search) |
-                Q(translations__kg__title__icontains=search) |
-                Q(translations__kg__description__icontains=search) |
-                Q(city__icontains=search)
-            )
+            # Normalize search query to lowercase for case-insensitive search
+            search_lower = search.lower().strip()
+            if search_lower:
+                # Search in the combined search_text field (already lowercase)
+                queryset = queryset.filter(search_text__contains=search_lower)
         
         return queryset
     
