@@ -69,6 +69,15 @@ class Service(models.Model):
     # Multilingual fields
     translations = models.JSONField(default=dict, help_text='{"ru": {"title": "...", "description": "..."}, ...}')
     
+    # Service avatar
+    avatar = models.ImageField(
+        upload_to='services/avatars/',
+        blank=True,
+        null=True,
+        validators=[validate_icon_file],
+        help_text='Avatar image for the service'
+    )
+    
     # Search optimization field
     search_text = models.TextField(blank=True, help_text='Combined searchable text from titles and descriptions')
     

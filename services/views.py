@@ -130,6 +130,13 @@ class ServiceCreateView(generics.CreateAPIView):
     serializer_class = ServiceCreateUpdateSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def create(self, request, *args, **kwargs):
+        print(f"ServiceCreateView: request.data = {request.data}")
+        print(f"ServiceCreateView: request.FILES = {request.FILES}")
+        if 'avatar' in request.FILES:
+            print(f"Avatar file: {request.FILES['avatar']}")
+        return super().create(request, *args, **kwargs)
+
 
 class ServiceUpdateView(generics.UpdateAPIView):
     serializer_class = ServiceCreateUpdateSerializer

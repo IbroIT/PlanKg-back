@@ -83,13 +83,14 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
     category = CategorySerializer(read_only=True)
     title = serializers.SerializerMethodField()
     description = serializers.SerializerMethodField()
+    avatar = serializers.SerializerMethodField()
     images = serializers.SerializerMethodField()
     videos = serializers.SerializerMethodField()
     is_favorited = serializers.SerializerMethodField()
     
     class Meta:
         model = Service
-        fields = ['id', 'user', 'category', 'title', 'description', 'price', 
+        fields = ['id', 'user', 'category', 'title', 'description', 'avatar', 'price', 
                   'price_type', 'status', 'city', 'phone', 'email', 
                   'website', 'instagram', 'facebook', 'whatsapp', 'telegram', 'capacity', 
                   'average_check', 'event_duration', 'additional_services',
@@ -122,6 +123,14 @@ class ServiceDetailSerializer(serializers.ModelSerializer):
         trans = obj.get_translation(lang)
         return trans.get('description', '')
     
+    def get_avatar(self, obj):
+        if obj.avatar:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.avatar.url)
+            return obj.avatar.url
+        return None
+    
     def get_images(self, obj):
         request = self.context.get('request')
         images = []
@@ -150,7 +159,7 @@ class ServiceCreateUpdateSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Service
-        fields = ['id', 'category_id', 'translations', 'price', 'price_type',
+        fields = ['id', 'category_id', 'translations', 'avatar', 'price', 'price_type',
                   'city', 'phone', 'email', 'website', 'instagram', 
                   'facebook', 'capacity', 'average_check', 'event_duration',
                   'additional_services', 'experience_years', 'hourly_rate', 'gender',
